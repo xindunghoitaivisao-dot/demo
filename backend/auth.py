@@ -11,7 +11,7 @@ from fastapi import HTTPException
 EMERGENT_AUTH_API = "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data"
 
 
-async def process_session_id(session_id: str, db: AsyncIOMotorDatabase):
+async def process_session_id(session_id: str, db: AsyncIOMotorDatabase | None):
     """Process session_id from Emergent OAuth and create user session."""
     try:
         # Call Emergent auth API to get user data
