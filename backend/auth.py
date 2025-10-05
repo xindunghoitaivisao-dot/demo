@@ -5,6 +5,7 @@ from typing import Optional
 from datetime import datetime, timezone, timedelta
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from models import User, UserSession
+from fastapi import HTTPException
 
 
 EMERGENT_AUTH_API = "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data"
