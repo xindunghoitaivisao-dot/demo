@@ -168,9 +168,7 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus:
-    - "Verify /api/landing returns expected JSON shape (hero, approach, pillars, solutions, logos, stats, blogPosts)"
-    - "Verify /api/ health endpoint responds"
+  current_focus: []
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
