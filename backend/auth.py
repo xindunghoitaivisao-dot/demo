@@ -22,6 +22,10 @@ async def process_session_id(session_id: str, db: AsyncIOMotorDatabase | None):
         user_data = response.json()
         
         # Check if user exists
+        if db is None:
+            # If DB is not configured, return minimal session response
+            return {"session_token": user_data["session_token"], "user": user_data}
+
         existing_user = await db.users.find_one({"_id": user_data["id"]})
         
         if not existing_user:
