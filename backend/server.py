@@ -19,9 +19,26 @@ ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+mongo_url = os.environ.get('MONGO_URL')
+db_name = os.environ.get('DB_NAME')
+
+# Initialize Mongo client only if env vars are present to avoid startup failures
+try:
+    if mongo_url and db_name:
+        client = AsyncIOMotorClient(mongo_url)
+        db = client[db_name]
+        logger = logging.getLogger(__name__)
+        logger.info("MongoDB client initialized successfully")
+    else:
+        client = None
+        db = None
+        logger = logging.getLogger(__name__)
+        logger.warning("MONGO_URL/DB_NAME not set. Database features will be disabled until provided.")
+except Exception as e:
+    client = None
+    db = None
+    logger = logging.getLogger(__name__)
+    logger.error(f"Failed to initialize MongoDB client: {e}")
 
 # Create the main app
 app = FastAPI()
