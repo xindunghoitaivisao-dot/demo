@@ -9,8 +9,8 @@ import json
 import sys
 from typing import Dict, Any
 
-# Backend URL from environment
-BACKEND_URL = "https://demobackend.emergentagent.com"
+# Backend URL - testing locally since we're in the same container
+BACKEND_URL = "http://localhost:8001"
 API_BASE = f"{BACKEND_URL}/api"
 
 def test_health_endpoint():
