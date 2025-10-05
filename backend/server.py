@@ -168,6 +168,23 @@ async def get_ai_insights(request: Request, current_user: User = Depends(lambda 
             "message": "12 high-value accounts showing decreased engagement patterns. Proactive outreach recommended.",
             "confidence": 87
         },
+        {
+            "type": "info",
+            "icon": "Lightbulb",
+            "title": "Market Trend",
+            "message": "Industry benchmark analysis suggests expanding AI advisory services could capture $1.2M additional TAM.",
+            "confidence": 82
+        },
+        {
+            "type": "success",
+            "icon": "Target",
+            "title": "Optimization Win",
+            "message": "Recent model update improved prediction accuracy by 8.3%, reducing false positives by 34%.",
+            "confidence": 96
+        }
+    ]
+    return insights
+
 
 # ===== PUBLIC LANDING CONTENT ROUTE =====
 @api_router.get("/landing")
