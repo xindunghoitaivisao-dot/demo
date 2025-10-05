@@ -14,51 +14,51 @@
 # Main and testing agents must follow this exact format to maintain testing data. 
 # The testing data must be entered in yaml format Below is the data structure:
 # 
-## user_problem_statement: {problem_statement}
-## backend:
-##   - task: "Task name"
-##     implemented: true
-##     working: true  # or false or "NA"
-##     file: "file_path.py"
-##     stuck_count: 0
-##     priority: "high"  # or "medium" or "low"
-##     needs_retesting: false
-##     status_history:
-##         -working: true  # or false or "NA"
-##         -agent: "main"  # or "testing" or "user"
-##         -comment: "Detailed comment about status"
-##
-## frontend:
-##   - task: "Task name"
-##     implemented: true
-##     working: true  # or false or "NA"
-##     file: "file_path.js"
-##     stuck_count: 0
-##     priority: "high"  # or "medium" or "low"
-##     needs_retesting: false
-##     status_history:
-##         -working: true  # or false or "NA"
-##         -agent: "main"  # or "testing" or "user"
-##         -comment: "Detailed comment about status"
-##
-## metadata:
-##   created_by: "main_agent"
-##   version: "1.0"
-##   test_sequence: 0
-##   run_ui: false
-##
-## test_plan:
-##   current_focus:
-##     - "Task name 1"
-##     - "Task name 2"
-##   stuck_tasks:
-##     - "Task name with persistent issues"
-##   test_all: false
-##   test_priority: "high_first"  # or "sequential" or "stuck_first"
-##
-## agent_communication:
-##     -agent: "main"  # or "testing" or "user"
-##     -message: "Communication message between agents"
+# ## user_problem_statement: {problem_statement}
+# ## backend:
+# ##   - task: "Task name"
+# ##     implemented: true
+# ##     working: true  # or false or "NA"
+# ##     file: "file_path.py"
+# ##     stuck_count: 0
+# ##     priority: "high"  # or "medium" or "low"
+# ##     needs_retesting: false
+# ##     status_history:
+# ##         -working: true  # or false or "NA"
+# ##         -agent: "main"  # or "testing" or "user"
+# ##         -comment: "Detailed comment about status"
+# ##
+# ## frontend:
+# ##   - task: "Task name"
+# ##     implemented: true
+# ##     working: true  # or false or "NA"
+# ##     file: "file_path.js"
+# ##     stuck_count: 0
+# ##     priority: "high"  # or "medium" or "low"
+# ##     needs_retesting: false
+# ##     status_history:
+# ##         -working: true  # or false or "NA"
+# ##         -agent: "main"  # or "testing" or "user"
+# ##         -comment: "Detailed comment about status"
+# ##
+# ## metadata:
+# ##   created_by: "main_agent"
+# ##   version: "1.0"
+# ##   test_sequence: 0
+# ##   run_ui: false
+# ##
+# ## test_plan:
+# ##   current_focus:
+# ##     - "Task name 1"
+# ##     - "Task name 2"
+# ##   stuck_tasks:
+# ##     - "Task name with persistent issues"
+# ##   test_all: false
+# ##   test_priority: "high_first"  # or "sequential" or "stuck_first"
+# ##
+# ## agent_communication:
+# ##     -agent: "main"  # or "testing" or "user"
+# ##     -message: "Communication message between agents"
 
 # Protocol Guidelines for Main agent
 #
@@ -101,3 +101,71 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Build the landing page from the GitHub repository (frontend and backend)"
+
+backend:
+  - task: "Public landing content API (/api/landing)"
+    implemented: true
+    working: "NA"
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added /api/landing endpoint returning structured landing content; no auth required."
+  - task: "Graceful startup without MONGO_URL/DB_NAME"
+    implemented: true
+    working: "NA"
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Made Mongo client optional with env check and safe shutdown; prevents crashes when env vars absent."
+  - task: "Auth fallback when DB unavailable"
+    implemented: true
+    working: "NA"
+    file: "backend/auth.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "If DB is None, get_current_user returns a demo user based on headers to allow protected routes during demo."
+
+frontend:
+  - task: "Landing page at / matching repo design"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/pages/LandingPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Landing page already implemented with sections and images from repo mock data. No API calls required."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Verify /api/landing returns expected JSON shape (hero, approach, pillars, solutions, logos, stats, blogPosts)"
+    - "Verify /api/ health endpoint responds"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Please test the new backend landing endpoint and basic health. Frontend landing page is static and does not require testing yet unless requested by user."
