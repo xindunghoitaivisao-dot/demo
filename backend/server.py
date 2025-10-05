@@ -276,29 +276,7 @@ async def get_landing_content():
         ]
     }
     return content
-        {
-            "type": "info",
-            "icon": "Lightbulb",
-            "title": "Market Trend",
-            "message": "Industry benchmark analysis suggests expanding AI advisory services could capture $1.2M additional TAM.",
-            "confidence": 82
-        },
-        {
-            "type": "success",
-            "icon": "Target",
-            "title": "Optimization Win",
-            "message": "Recent model update improved prediction accuracy by 8.3%, reducing false positives by 34%.",
-            "confidence": 96
-        }
-    ]
-    return insights
 
-
-# ===== PUBLIC LANDING CONTENT ROUTE =====
-@api_router.get("/landing")
-async def get_landing_content():
-    """Public content for the marketing landing page (no auth required)."""
-    content = {
         "hero": {
             "title": "Transform Your Business with AI",
             "subtitle": "We help enterprises deploy AI solutions that drive real business value. From strategy to implementation, we're your partner in AI transformation.",
