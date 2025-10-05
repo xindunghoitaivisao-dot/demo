@@ -60,7 +60,7 @@ async def process_session_id(session_id: str, db: AsyncIOMotorDatabase | None):
         raise HTTPException(status_code=400, detail=f"Session processing failed: {str(e)}")
 
 
-async def get_current_user(request: Request, db: AsyncIOMotorDatabase, session_token: Optional[str] = Cookie(None)):
+async def get_current_user(request: Request, db: AsyncIOMotorDatabase | None, session_token: Optional[str] = Cookie(None)):
     """Get current user from session token (cookie or Authorization header)."""
     
     # Try cookie first
