@@ -277,23 +277,6 @@ async def get_landing_content():
     }
     return content
 
-        {
-            "type": "info",
-            "icon": "Lightbulb",
-            "title": "Market Trend",
-            "message": "Industry benchmark analysis suggests expanding AI advisory services could capture $1.2M additional TAM.",
-            "confidence": 82
-        },
-        {
-            "type": "success",
-            "icon": "Target",
-            "title": "Optimization Win",
-            "message": "Recent model update improved prediction accuracy by 8.3%, reducing false positives by 34%.",
-            "confidence": 96
-        }
-    ]
-    return insights
-
 
 # ===== REPORTS ROUTES =====
 
